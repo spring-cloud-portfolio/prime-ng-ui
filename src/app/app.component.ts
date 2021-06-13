@@ -19,7 +19,8 @@ export class AppComponent implements OnInit {
     this.primengConfig.ripple = true;
     // OAuth2 initiation
     this.oAuthService.configure(authCodeFlowConfig);
-    this.oAuthService.loadDiscoveryDocumentAndLogin().then();
+    this.oAuthService.setupAutomaticSilentRefresh();
+    this.oAuthService.loadDiscoveryDocumentAndTryLogin().then();
   }
 
 }

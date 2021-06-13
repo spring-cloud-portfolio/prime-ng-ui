@@ -12,6 +12,13 @@ import {HttpClientModule} from '@angular/common/http';
 import {CookieModule} from 'ngx-cookie';
 import {HomeComponent} from './ui/page/home/home.component';
 import {OAuthModule} from 'angular-oauth2-oidc';
+import {SignInComponent} from './ui/page/security/sign-in/sign-in.component';
+import {environment} from '../environments/environment';
+import { SignUpComponent } from './ui/page/security/sign-up/sign-up.component';
+import {CardModule} from 'primeng/card';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -19,16 +26,30 @@ import {OAuthModule} from 'angular-oauth2-oidc';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
+    SignInComponent,
+    SignUpComponent,
   ],
   imports: [
+    CardModule,
+    FormsModule,
     ButtonModule,
     RippleModule,
     BrowserModule,
+    InputTextModule,
     HttpClientModule,
     AppRoutingModule,
-    OAuthModule.forRoot(),
+    InputTextareaModule,
+    ReactiveFormsModule,
     CookieModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+        sendAccessToken: true,
+        allowedUrls: [
+          environment.personServiceUrl
+        ]
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
